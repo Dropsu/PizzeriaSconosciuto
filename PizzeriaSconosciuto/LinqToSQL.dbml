@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Pizzeria" Class="LinqToSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=Pizzeria;Integrated Security=True" SettingsObjectName="PizzeriaSconosciuto.Properties.Settings" SettingsPropertyName="PizzeriaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Produkty" Member="Produkties">
+    <Type Name="Produkty">
+      <Column Name="IdProduktu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nazwa" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ilosc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cena" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Association Name="Produkty_Wchodzi_w_sklad" Member="Wchodzi_w_sklads" ThisKey="IdProduktu" OtherKey="ProduktID" Type="Wchodzi_w_sklad" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Adres" Member="Adres">
+    <Type Name="Adre">
+      <Column Name="AdresID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Miasto" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ulica" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Nr_domu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nr_mieszkania" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Kraj" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Association Name="Adre_Dostawcy" Member="Dostawcies" ThisKey="AdresID" OtherKey="AdresID" Type="Dostawcy" />
+      <Association Name="Adre_Pracownicy" Member="Pracownicies" ThisKey="AdresID" OtherKey="AdresID" Type="Pracownicy" />
+      <Association Name="Adre_Zamowienia" Member="Zamowienias" ThisKey="AdresID" OtherKey="AdresID" Type="Zamowienia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dostawa_Skladnik" Member="Dostawa_Skladniks">
+    <Type Name="Dostawa_Skladnik">
+      <Column Name="DostawaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EAN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ilosc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cena" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Association Name="Dostawy_Dostawa_Skladnik" Member="Dostawy" ThisKey="DostawaID" OtherKey="DostawaID" Type="Dostawy" IsForeignKey="true" />
+      <Association Name="Skladniki_Dostawa_Skladnik" Member="Skladniki" ThisKey="EAN" OtherKey="EAN" Type="Skladniki" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dostawy" Member="Dostawies">
+    <Type Name="Dostawy">
+      <Column Name="DostawaID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NIP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Dostawy_Dostawa_Skladnik" Member="Dostawa_Skladniks" ThisKey="DostawaID" OtherKey="DostawaID" Type="Dostawa_Skladnik" />
+      <Association Name="Dostawcy_Dostawy" Member="Dostawcy" ThisKey="NIP" OtherKey="NIP" Type="Dostawcy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dostawcy" Member="Dostawcies">
+    <Type Name="Dostawcy">
+      <Column Name="NIP" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AdresID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nazwa" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Dostawcy_Dostawy" Member="Dostawies" ThisKey="NIP" OtherKey="NIP" Type="Dostawy" />
+      <Association Name="Adre_Dostawcy" Member="Adre" ThisKey="AdresID" OtherKey="AdresID" Type="Adre" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Grafik" Member="Grafiks">
+    <Type Name="Grafik">
+      <Column Name="GrafikID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PracownikID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Dzien" Type="System.String" DbType="NChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="Od" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Do" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Pracownicy_Grafik" Member="Pracownicy" ThisKey="PracownikID" OtherKey="PracownikID" Type="Pracownicy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kontrakt" Member="Kontrakts">
+    <Type Name="Kontrakt">
+      <Column Name="KontraktID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PracownikID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Kwota" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Association Name="Pracownicy_Kontrakt" Member="Pracownicy" ThisKey="PracownikID" OtherKey="PracownikID" Type="Pracownicy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pracownicy" Member="Pracownicies">
+    <Type Name="Pracownicy">
+      <Column Name="PracownikID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AdresID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Imie" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Nazwisko" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="Stanowisko" Type="System.String" DbType="NChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefon" Type="System.String" DbType="NChar(12)" CanBeNull="true" />
+      <Association Name="Pracownicy_Grafik" Member="Grafiks" ThisKey="PracownikID" OtherKey="PracownikID" Type="Grafik" />
+      <Association Name="Pracownicy_Kontrakt" Member="Kontrakts" ThisKey="PracownikID" OtherKey="PracownikID" Type="Kontrakt" />
+      <Association Name="Pracownicy_Zamowienia" Member="Zamowienias" ThisKey="PracownikID" OtherKey="KierowcaID" Type="Zamowienia" />
+      <Association Name="Pracownicy_Zamowienia1" Member="Zamowienias1" ThisKey="PracownikID" OtherKey="KucharzID" Type="Zamowienia" />
+      <Association Name="Adre_Pracownicy" Member="Adre" ThisKey="AdresID" OtherKey="AdresID" Type="Adre" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Skladniki" Member="Skladnikis">
+    <Type Name="Skladniki">
+      <Column Name="EAN" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nazwa" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ilosc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Wege" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Gluten" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Opis" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Skladniki_Dostawa_Skladnik" Member="Dostawa_Skladniks" ThisKey="EAN" OtherKey="EAN" Type="Dostawa_Skladnik" />
+      <Association Name="Skladniki_Wchodzi_w_sklad" Member="Wchodzi_w_sklads" ThisKey="EAN" OtherKey="EAN" Type="Wchodzi_w_sklad" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Wchodzi_w_sklad" Member="Wchodzi_w_sklads">
+    <Type Name="Wchodzi_w_sklad">
+      <Column Name="EAN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProduktID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ilosc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Produkty_Wchodzi_w_sklad" Member="Produkty" ThisKey="ProduktID" OtherKey="IdProduktu" Type="Produkty" IsForeignKey="true" />
+      <Association Name="Skladniki_Wchodzi_w_sklad" Member="Skladniki" ThisKey="EAN" OtherKey="EAN" Type="Skladniki" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Zamowienia" Member="Zamowienias">
+    <Type Name="Zamowienia">
+      <Column Name="ZamowienieID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="KierowcaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="KucharzID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AdresID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Czas_Zamowienia" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Czas_Dostawy" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Telefon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Adre_Zamowienia" Member="Adre" ThisKey="AdresID" OtherKey="AdresID" Type="Adre" IsForeignKey="true" />
+      <Association Name="Pracownicy_Zamowienia" Member="Pracownicy" ThisKey="KierowcaID" OtherKey="PracownikID" Type="Pracownicy" IsForeignKey="true" />
+      <Association Name="Pracownicy_Zamowienia1" Member="Pracownicy1" ThisKey="KucharzID" OtherKey="PracownikID" Type="Pracownicy" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
