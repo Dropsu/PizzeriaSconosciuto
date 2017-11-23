@@ -30,7 +30,7 @@ namespace PizzeriaSconosciuto
             // https://www.tutorialspoint.com/linq/linq_sql.htm
 
             SqlConnection conn = new SqlConnection(
-            "Data Source = (LocalDb)\\MSSQLLocalDB; Initial Catalog=Pizzeria;User ID=Pizza;Password=pizza1");
+            "Data Source = .\\SQLEXPRESS; Initial Catalog=Pizzeria;User ID=Pizzus;Password=pizza");
             LinqToSQLDataContext db = new LinqToSQLDataContext(conn);
 
 
