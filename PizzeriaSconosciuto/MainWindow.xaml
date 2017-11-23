@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Label x:Name="produkty_label" Content="Produkty" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="31,41,0,0" VerticalAlignment="Top" Height="205" Width="283"/>
+        <Button x:Name="dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="31,265,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" Height="35"/>
+        <Button x:Name="usun" Content="Usuń" HorizontalAlignment="Left" Margin="239,265,0,0" VerticalAlignment="Top" Width="75" Click="button_Click_1" Height="35" RenderTransformOrigin="1.731,0.558"/>
+        <Button x:Name="zmien" Content="Zmień dane" HorizontalAlignment="Left" Margin="134,265,0,0" VerticalAlignment="Top" Width="75" Height="35"/>
+        <Label x:Name="produkt_label" Content="Produkt" HorizontalAlignment="Left" Margin="386,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.353,1.181"/>
+        <Label x:Name="produktid_label" Content="ProduktID" HorizontalAlignment="Left" Margin="334,100,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="nazwa_label" Content="Nazwa" HorizontalAlignment="Left" Margin="334,131,0,0" VerticalAlignment="Top" Width="63" RenderTransformOrigin="0.059,0.702"/>
+        <Label x:Name="cena_label" Content="Cena" HorizontalAlignment="Left" Margin="334,162,0,0" VerticalAlignment="Top" Width="63" RenderTransformOrigin="0,0.607"/>
+        <Label x:Name="ilosc_label" Content="Ilosc" HorizontalAlignment="Left" Margin="334,193,0,0" VerticalAlignment="Top" Width="63" Height="26"/>
+        <Button x:Name="wykonaj" Content="Dodaj / Usuń / Zmień" HorizontalAlignment="Left" Margin="345,231,0,0" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="produktid_box" HorizontalAlignment="Left" Height="23" Margin="418,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="nazwa_box" HorizontalAlignment="Left" Height="23" Margin="418,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="cena_box" HorizontalAlignment="Left" Height="23" Margin="418,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="ilosc_box" HorizontalAlignment="Left" Height="23" Margin="418,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+
     </Grid>
 </Window>
