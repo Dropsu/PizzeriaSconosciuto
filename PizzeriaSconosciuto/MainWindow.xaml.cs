@@ -58,24 +58,43 @@ namespace PizzeriaSconosciuto
             nowy.cena = (float)cena;
             nowy.Ilosc = Ilosc;
 
+
             db.Produkties.InsertOnSubmit(nowy);
             db.SubmitChanges();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            dodajProdukt(db, nazwa_box.Text, Int32.Parse(ilosc_box.Text), Int32.Parse(cena_box.Text));
-            fillTablie();
+            if (nazwa_box.Text == ""||cena_box.Text == ""|| ilosc_box.Text == "")
+            {
+                MessageBox.Show("Uzupelnij nazwe, cene i ilosc", "Error", MessageBoxButton.OK);
+
+            }
+            else
+            {
+                dodajProdukt(db, nazwa_box.Text, Int32.Parse(ilosc_box.Text), Int32.Parse(cena_box.Text));
+                fillTablie();
+            }
+            
         }
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            usunProdukt(Int32.Parse(produktid_box.Text));
-            fillTablie();
+            if (produktid_box.Text=="")
+            {
+                MessageBox.Show("Podaj Id produktu do usuniecia", "Error", MessageBoxButton.OK);
+            }
+            else
+            {
+                usunProdukt(Int32.Parse(produktid_box.Text));
+                fillTablie();
+            }
+            
         }
 
         private void usunProdukt(int id)
         {
+
             var delete =
             from Produkty in db.Produkties
             where Produkty.IdProduktu == id
@@ -108,21 +127,29 @@ namespace PizzeriaSconosciuto
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            fillTablie();
+            fillTablie();   
         }
 
         private void zmien_Click(object sender, RoutedEventArgs e)
         {
+            if (produktid_box.Text == ""| nazwa_box.Text == "" || cena_box.Text == "" || ilosc_box.Text == "")
+            {
+                MessageBox.Show("Wybierz id produktu do zmiany i uzupelnij wszystkie pola", "Error", MessageBoxButton.OK);
+            }
+            else
+            {
+                Produkty result = (from p in db.Produkties
+                                   where p.IdProduktu == Int32.Parse(produktid_box.Text)
+                                   select p).SingleOrDefault();
 
-            Produkty result = (from p in db.Produkties
-                               where p.IdProduktu == Int32.Parse(produktid_box.Text)
-                               select p).SingleOrDefault();
+                result.Ilosc = Int32.Parse(ilosc_box.Text);
+                result.Nazwa = nazwa_box.Text;
+                result.cena = Int32.Parse(cena_box.Text);
 
-            result.Ilosc = Int32.Parse(ilosc_box.Text);
-            result.Nazwa = nazwa_box.Text;
-            result.cena = Int32.Parse(cena_box.Text);
+                db.SubmitChanges();
+            }
 
-            db.SubmitChanges();
+            
         }
     }
 
