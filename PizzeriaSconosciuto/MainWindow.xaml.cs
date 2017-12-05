@@ -39,7 +39,7 @@ namespace PizzeriaSconosciuto
 
 
 
-            dodajProdukt(db, "Hawajska SREDNIA", 10, 29.99);
+            dodajProdukt(db, "Hawajska SREDNIA", 10, 29.98);
 
 
 
@@ -48,18 +48,22 @@ namespace PizzeriaSconosciuto
             InitializeComponent();
 
             Loaded += Window_Loaded;
+
         }
 
         public void dodajProdukt(LinqToSQLDataContext db, string nazwa, int Ilosc, double cena)
         {
 
-            Produkty nowy = new Produkty();
-            nowy.Nazwa = nazwa;
-            nowy.cena = (float)cena;
-            nowy.Ilosc = Ilosc;
+            try
+            {
+                db.InsertProdukt(nazwa, Ilosc, cena);
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            }
 
 
-            db.Produkties.InsertOnSubmit(nowy);
+
             db.SubmitChanges();
         }
 
@@ -72,7 +76,7 @@ namespace PizzeriaSconosciuto
             }
             else
             {
-                dodajProdukt(db, nazwa_box.Text, Int32.Parse(ilosc_box.Text), Int32.Parse(cena_box.Text));
+                dodajProdukt(db, nazwa_box.Text, Int32.Parse(ilosc_box.Text),Convert.ToDouble(cena_box.Text));
                 fillTablie();
             }
             
@@ -151,6 +155,7 @@ namespace PizzeriaSconosciuto
 
             
         }
+
     }
 
 

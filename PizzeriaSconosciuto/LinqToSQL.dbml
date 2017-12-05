@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Pizzeria" Class="LinqToSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=Pizzeria;Integrated Security=True" SettingsObjectName="PizzeriaSconosciuto.Properties.Settings" SettingsPropertyName="PizzeriaConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=Pizzeria;Integrated Security=True" SettingsObjectName="PizzeriaSconosciuto.Properties.Settings" SettingsPropertyName="PizzeriaConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Produkty" Member="Produkties">
     <Type Name="Produkty">
       <Column Name="IdProduktu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -119,4 +119,10 @@
       <Association Name="Pracownicy_Zamowienia1" Member="Pracownicy1" ThisKey="KucharzID" OtherKey="PracownikID" Type="Pracownicy" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.InsertProdukt" Method="InsertProdukt">
+    <Parameter Name="Nazwa" Parameter="nazwa" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Ilosc" Parameter="ilosc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="cena" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
