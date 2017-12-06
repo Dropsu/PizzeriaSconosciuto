@@ -98,7 +98,8 @@ namespace PizzeriaSconosciuto
 
         private void usunProdukt(int id)
         {
-
+            try
+            {
             var delete =
             from Produkty in db.Produkties
             where Produkty.IdProduktu == id
@@ -109,14 +110,13 @@ namespace PizzeriaSconosciuto
                 db.Produkties.DeleteOnSubmit(produkt);
             }
 
-            try
-            {
+            
                 db.SubmitChanges();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                // Provide for exceptions.
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK);
+
             }
         }
 
