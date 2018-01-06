@@ -16,21 +16,28 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace PizzeriaSconosciuto
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logika interakcji dla klasy MainPage.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class MainPage : Page
     {
-      
-        public MainWindow()
+
+        public MainPage()
         {
             InitializeComponent();
-            this.Source = new Uri("MainPage.xaml", UriKind.Relative);
         }
 
-    }
+        
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("ProduktyPage.xaml", UriKind.Relative));
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("WchodziWSklad.xaml", UriKind.Relative));
+        }
+    }
 }

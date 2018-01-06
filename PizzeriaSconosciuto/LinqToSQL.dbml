@@ -125,4 +125,15 @@
     <Parameter Name="cena" Type="System.Double" DbType="Float" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.DeleteProduct" Method="DeleteProduct">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.AlterProduct" Method="AlterProduct">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nazwa" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="cena" Type="System.Double" DbType="Float" />
+    <Parameter Name="ilosc" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
