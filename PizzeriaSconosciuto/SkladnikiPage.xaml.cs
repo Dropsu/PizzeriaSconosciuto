@@ -63,7 +63,7 @@ namespace PizzeriaSconosciuto
                 skladniki.Wege = wege;
                 skladniki.Gluten = gluten;
 
-                db.Skladnikis.InsertOnSubmit(skladniki);
+                db.Skladniki.InsertOnSubmit(skladniki);
                 db.SubmitChanges();
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace PizzeriaSconosciuto
             try
             {
                 dodajProdukt(db, Int32.Parse(EAN_box.Text), nazwa_box.Text, Int32.Parse(ilosc_box.Text),opis_box.Text,wege_check.IsChecked.Value,gluten_check.IsChecked.Value);
-                genericsHelper.fillTablie(db.Skladnikis, db, conn, dataGrid);
+                genericsHelper.fillTablie(db.Skladniki, db, conn, dataGrid);
             }
             catch (Exception ex)
             {
@@ -91,7 +91,7 @@ namespace PizzeriaSconosciuto
             try
             {
                 usunProdukt(Int32.Parse(EAN_box.Text));
-                genericsHelper.fillTablie(db.Skladnikis, db, conn, dataGrid);
+                genericsHelper.fillTablie(db.Skladniki, db, conn, dataGrid);
             }
             catch (Exception ex)
             {
@@ -103,12 +103,12 @@ namespace PizzeriaSconosciuto
         private void usunProdukt(int EAN)
         {
             var delete =
-            from Skladniki in db.Skladnikis
+            from Skladniki in db.Skladniki
             where Skladniki.EAN == EAN
             select Skladniki;
             foreach (var skladnik in delete)
             {
-                db.Skladnikis.DeleteOnSubmit(skladnik);
+                db.Skladniki.DeleteOnSubmit(skladnik);
             }
             try
             {
@@ -123,7 +123,7 @@ namespace PizzeriaSconosciuto
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            genericsHelper.fillTablie(db.Skladnikis, db, conn, dataGrid);
+            genericsHelper.fillTablie(db.Skladniki, db, conn, dataGrid);
         }
 
         private void zmien_Click(object sender, RoutedEventArgs e)
@@ -135,7 +135,7 @@ namespace PizzeriaSconosciuto
             }
             else
             {
-                Skladniki result = (from s in db.Skladnikis
+                Skladniki result = (from s in db.Skladniki
                                    where s.EAN == Int32.Parse(EAN_box.Text)
                                    select s).SingleOrDefault();
                 result.Ilosc = Int32.Parse(ilosc_box.Text);

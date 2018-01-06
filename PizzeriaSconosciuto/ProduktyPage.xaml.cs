@@ -54,7 +54,7 @@ namespace PizzeriaSconosciuto
 
             try
             {
-                db.InsertProdukt(nazwa, Ilosc, cena);
+                db.InsertProdukt(nazwa, cena);
                 db.SubmitChanges();
             }
             catch (Exception ex)
@@ -68,7 +68,7 @@ namespace PizzeriaSconosciuto
             try
             {
                 dodajProdukt(db, nazwa_box.Text, 999, Convert.ToDouble(cena_box.Text));
-                genericsHelper.fillTablie(db.Produkties, db, conn, dataGrid);
+                genericsHelper.fillTablie(db.Produkty, db, conn, dataGrid);
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace PizzeriaSconosciuto
             try
             {
                 usunProdukt(Int32.Parse(produktid_box.Text));
-                genericsHelper.fillTablie(db.Produkties, db, conn, dataGrid);
+                genericsHelper.fillTablie(db.Produkty, db, conn, dataGrid);
             }
             catch (Exception ex)
             {
@@ -106,23 +106,25 @@ namespace PizzeriaSconosciuto
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            genericsHelper.fillTablie(db.Produkties, db, conn, dataGrid);
+            genericsHelper.fillTablie(db.Produkty, db, conn, dataGrid);
         }
 
         private void zmien_Click(object sender, RoutedEventArgs e)
         {
-
-            try
+            if (produktid_box.Text == "" | nazwa_box.Text == "" || cena_box.Text == "")
             {
-                db.AlterProduct(Int32.Parse(produktid_box.Text), nazwa_box.Text, Convert.ToDouble(cena_box.Text), 999);
+                MessageBox.Show("Wybierz id produktu do zmiany i uzupelnij wszystkie pola", "Error",
+                MessageBoxButton.OK);
+            }
+            else
+            {
+                Produkty result = (from p in db.Produkty
+                                   where p.IdProduktu == Int32.Parse(produktid_box.Text)
+                                   select p).SingleOrDefault();
+                result.Nazwa = nazwa_box.Text;
+                result.cena = Int32.Parse(cena_box.Text);
                 db.SubmitChanges();
-                genericsHelper.fillTablie(db.Produkties, db, conn, dataGrid);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-            }
-
         }
     }
 }

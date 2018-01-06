@@ -23,16 +23,13 @@ namespace PizzeriaSconosciuto
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Pizzeria")]
-	public partial class LinqToSQLDataContext : System.Data.Linq.DataContext
+	public partial class LinqToSQLDataContext2DataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertGrafik(Grafik instance);
-    partial void UpdateGrafik(Grafik instance);
-    partial void DeleteGrafik(Grafik instance);
     partial void InsertAdres(Adres instance);
     partial void UpdateAdres(Adres instance);
     partial void DeleteAdres(Adres instance);
@@ -42,6 +39,9 @@ namespace PizzeriaSconosciuto
     partial void InsertDostawy(Dostawy instance);
     partial void UpdateDostawy(Dostawy instance);
     partial void DeleteDostawy(Dostawy instance);
+    partial void InsertGrafik(Grafik instance);
+    partial void UpdateGrafik(Grafik instance);
+    partial void DeleteGrafik(Grafik instance);
     partial void InsertKontrakt(Kontrakt instance);
     partial void UpdateKontrakt(Kontrakt instance);
     partial void DeleteKontrakt(Kontrakt instance);
@@ -59,42 +59,34 @@ namespace PizzeriaSconosciuto
     partial void DeleteZamowienia(Zamowienia instance);
     #endregion
 		
-		public LinqToSQLDataContext() : 
+		public LinqToSQLDataContext2DataContext() : 
 				base(global::PizzeriaSconosciuto.Properties.Settings.Default.PizzeriaConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public LinqToSQLDataContext(string connection) : 
+		public LinqToSQLDataContext2DataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public LinqToSQLDataContext(System.Data.IDbConnection connection) : 
+		public LinqToSQLDataContext2DataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public LinqToSQLDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public LinqToSQLDataContext2DataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public LinqToSQLDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public LinqToSQLDataContext2DataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Grafik> Grafik
-		{
-			get
-			{
-				return this.GetTable<Grafik>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Adres> Adres
@@ -126,6 +118,14 @@ namespace PizzeriaSconosciuto
 			get
 			{
 				return this.GetTable<Dostawy>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Grafik> Grafik
+		{
+			get
+			{
+				return this.GetTable<Grafik>();
 			}
 		}
 		
@@ -169,14 +169,6 @@ namespace PizzeriaSconosciuto
 			}
 		}
 		
-		public System.Data.Linq.Table<Zamowienia> Zamowienia
-		{
-			get
-			{
-				return this.GetTable<Zamowienia>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Wchodzi_w_sklad> Wchodzi_w_sklad
 		{
 			get
@@ -185,224 +177,18 @@ namespace PizzeriaSconosciuto
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.DeleteProduct")]
-		public int DeleteProduct([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD)
+		public System.Data.Linq.Table<Zamowienia> Zamowienia
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD);
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<Zamowienia>();
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertProdukt")]
-		public int InsertProdukt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nazwa", DbType="VarChar(20)")] string nazwa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> cena)
+		public void InsertProdukt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nazwa", DbType="VarChar(20)")] string nazwa, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Ilosc", DbType="Int")] System.Nullable<int> ilosc, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> cena)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nazwa, cena);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.AlterProduct")]
-		public int AlterProduct([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ID", DbType="Int")] System.Nullable<int> iD, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string nazwa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> cena)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iD, nazwa, cena);
-			return ((int)(result.ReturnValue));
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Grafik")]
-	public partial class Grafik : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _GrafikID;
-		
-		private int _PracownikID;
-		
-		private string _Dzien;
-		
-		private System.DateTime _Od;
-		
-		private System.DateTime _Do;
-		
-		private EntityRef<Pracownicy> _Pracownicy;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnGrafikIDChanging(int value);
-    partial void OnGrafikIDChanged();
-    partial void OnPracownikIDChanging(int value);
-    partial void OnPracownikIDChanged();
-    partial void OnDzienChanging(string value);
-    partial void OnDzienChanged();
-    partial void OnOdChanging(System.DateTime value);
-    partial void OnOdChanged();
-    partial void OnDoChanging(System.DateTime value);
-    partial void OnDoChanged();
-    #endregion
-		
-		public Grafik()
-		{
-			this._Pracownicy = default(EntityRef<Pracownicy>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrafikID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int GrafikID
-		{
-			get
-			{
-				return this._GrafikID;
-			}
-			set
-			{
-				if ((this._GrafikID != value))
-				{
-					this.OnGrafikIDChanging(value);
-					this.SendPropertyChanging();
-					this._GrafikID = value;
-					this.SendPropertyChanged("GrafikID");
-					this.OnGrafikIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PracownikID", DbType="Int NOT NULL")]
-		public int PracownikID
-		{
-			get
-			{
-				return this._PracownikID;
-			}
-			set
-			{
-				if ((this._PracownikID != value))
-				{
-					if (this._Pracownicy.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPracownikIDChanging(value);
-					this.SendPropertyChanging();
-					this._PracownikID = value;
-					this.SendPropertyChanged("PracownikID");
-					this.OnPracownikIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dzien", DbType="NChar(16) NOT NULL", CanBeNull=false)]
-		public string Dzien
-		{
-			get
-			{
-				return this._Dzien;
-			}
-			set
-			{
-				if ((this._Dzien != value))
-				{
-					this.OnDzienChanging(value);
-					this.SendPropertyChanging();
-					this._Dzien = value;
-					this.SendPropertyChanged("Dzien");
-					this.OnDzienChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Od", DbType="DateTime NOT NULL")]
-		public System.DateTime Od
-		{
-			get
-			{
-				return this._Od;
-			}
-			set
-			{
-				if ((this._Od != value))
-				{
-					this.OnOdChanging(value);
-					this.SendPropertyChanging();
-					this._Od = value;
-					this.SendPropertyChanged("Od");
-					this.OnOdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Do", DbType="DateTime NOT NULL")]
-		public System.DateTime Do
-		{
-			get
-			{
-				return this._Do;
-			}
-			set
-			{
-				if ((this._Do != value))
-				{
-					this.OnDoChanging(value);
-					this.SendPropertyChanging();
-					this._Do = value;
-					this.SendPropertyChanged("Do");
-					this.OnDoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pracownicy_Grafik", Storage="_Pracownicy", ThisKey="PracownikID", OtherKey="PracownikID", IsForeignKey=true)]
-		public Pracownicy Pracownicy
-		{
-			get
-			{
-				return this._Pracownicy.Entity;
-			}
-			set
-			{
-				Pracownicy previousValue = this._Pracownicy.Entity;
-				if (((previousValue != value) 
-							|| (this._Pracownicy.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Pracownicy.Entity = null;
-						previousValue.Grafik.Remove(this);
-					}
-					this._Pracownicy.Entity = value;
-					if ((value != null))
-					{
-						value.Grafik.Add(this);
-						this._PracownikID = value.PracownikID;
-					}
-					else
-					{
-						this._PracownikID = default(int);
-					}
-					this.SendPropertyChanged("Pracownicy");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nazwa, ilosc, cena);
 		}
 	}
 	
@@ -1058,6 +844,205 @@ namespace PizzeriaSconosciuto
 						this._NIP = default(int);
 					}
 					this.SendPropertyChanged("Dostawcy");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Grafik")]
+	public partial class Grafik : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _GrafikID;
+		
+		private int _PracownikID;
+		
+		private string _Dzien;
+		
+		private System.DateTime _Od;
+		
+		private System.DateTime _Do;
+		
+		private EntityRef<Pracownicy> _Pracownicy;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGrafikIDChanging(int value);
+    partial void OnGrafikIDChanged();
+    partial void OnPracownikIDChanging(int value);
+    partial void OnPracownikIDChanged();
+    partial void OnDzienChanging(string value);
+    partial void OnDzienChanged();
+    partial void OnOdChanging(System.DateTime value);
+    partial void OnOdChanged();
+    partial void OnDoChanging(System.DateTime value);
+    partial void OnDoChanged();
+    #endregion
+		
+		public Grafik()
+		{
+			this._Pracownicy = default(EntityRef<Pracownicy>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrafikID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int GrafikID
+		{
+			get
+			{
+				return this._GrafikID;
+			}
+			set
+			{
+				if ((this._GrafikID != value))
+				{
+					this.OnGrafikIDChanging(value);
+					this.SendPropertyChanging();
+					this._GrafikID = value;
+					this.SendPropertyChanged("GrafikID");
+					this.OnGrafikIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PracownikID", DbType="Int NOT NULL")]
+		public int PracownikID
+		{
+			get
+			{
+				return this._PracownikID;
+			}
+			set
+			{
+				if ((this._PracownikID != value))
+				{
+					if (this._Pracownicy.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPracownikIDChanging(value);
+					this.SendPropertyChanging();
+					this._PracownikID = value;
+					this.SendPropertyChanged("PracownikID");
+					this.OnPracownikIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dzien", DbType="NChar(16) NOT NULL", CanBeNull=false)]
+		public string Dzien
+		{
+			get
+			{
+				return this._Dzien;
+			}
+			set
+			{
+				if ((this._Dzien != value))
+				{
+					this.OnDzienChanging(value);
+					this.SendPropertyChanging();
+					this._Dzien = value;
+					this.SendPropertyChanged("Dzien");
+					this.OnDzienChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Od", DbType="DateTime NOT NULL")]
+		public System.DateTime Od
+		{
+			get
+			{
+				return this._Od;
+			}
+			set
+			{
+				if ((this._Od != value))
+				{
+					this.OnOdChanging(value);
+					this.SendPropertyChanging();
+					this._Od = value;
+					this.SendPropertyChanged("Od");
+					this.OnOdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Do", DbType="DateTime NOT NULL")]
+		public System.DateTime Do
+		{
+			get
+			{
+				return this._Do;
+			}
+			set
+			{
+				if ((this._Do != value))
+				{
+					this.OnDoChanging(value);
+					this.SendPropertyChanging();
+					this._Do = value;
+					this.SendPropertyChanged("Do");
+					this.OnDoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pracownicy_Grafik", Storage="_Pracownicy", ThisKey="PracownikID", OtherKey="PracownikID", IsForeignKey=true)]
+		public Pracownicy Pracownicy
+		{
+			get
+			{
+				return this._Pracownicy.Entity;
+			}
+			set
+			{
+				Pracownicy previousValue = this._Pracownicy.Entity;
+				if (((previousValue != value) 
+							|| (this._Pracownicy.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Pracownicy.Entity = null;
+						previousValue.Grafik.Remove(this);
+					}
+					this._Pracownicy.Entity = value;
+					if ((value != null))
+					{
+						value.Grafik.Add(this);
+						this._PracownikID = value.PracownikID;
+					}
+					else
+					{
+						this._PracownikID = default(int);
+					}
+					this.SendPropertyChanged("Pracownicy");
 				}
 			}
 		}
@@ -1924,6 +1909,69 @@ namespace PizzeriaSconosciuto
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Wchodzi_w_sklad")]
+	public partial class Wchodzi_w_sklad
+	{
+		
+		private int _EAN;
+		
+		private int _ProduktID;
+		
+		private int _Ilosc;
+		
+		public Wchodzi_w_sklad()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EAN", DbType="Int NOT NULL")]
+		public int EAN
+		{
+			get
+			{
+				return this._EAN;
+			}
+			set
+			{
+				if ((this._EAN != value))
+				{
+					this._EAN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProduktID", DbType="Int NOT NULL")]
+		public int ProduktID
+		{
+			get
+			{
+				return this._ProduktID;
+			}
+			set
+			{
+				if ((this._ProduktID != value))
+				{
+					this._ProduktID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ilosc", DbType="Int NOT NULL")]
+		public int Ilosc
+		{
+			get
+			{
+				return this._Ilosc;
+			}
+			set
+			{
+				if ((this._Ilosc != value))
+				{
+					this._Ilosc = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Zamowienia")]
 	public partial class Zamowienia : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2273,69 +2321,6 @@ namespace PizzeriaSconosciuto
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Wchodzi_w_sklad")]
-	public partial class Wchodzi_w_sklad
-	{
-		
-		private int _EAN;
-		
-		private int _ProduktID;
-		
-		private int _Ilosc;
-		
-		public Wchodzi_w_sklad()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EAN", DbType="Int NOT NULL")]
-		public int EAN
-		{
-			get
-			{
-				return this._EAN;
-			}
-			set
-			{
-				if ((this._EAN != value))
-				{
-					this._EAN = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProduktID", DbType="Int NOT NULL")]
-		public int ProduktID
-		{
-			get
-			{
-				return this._ProduktID;
-			}
-			set
-			{
-				if ((this._ProduktID != value))
-				{
-					this._ProduktID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ilosc", DbType="Int NOT NULL")]
-		public int Ilosc
-		{
-			get
-			{
-				return this._Ilosc;
-			}
-			set
-			{
-				if ((this._Ilosc != value))
-				{
-					this._Ilosc = value;
-				}
 			}
 		}
 	}
