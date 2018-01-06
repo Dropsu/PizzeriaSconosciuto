@@ -10,7 +10,7 @@
     <Grid>
         <Label Content="Wybierz Tabele" HorizontalAlignment="Left" Margin="231,21,0,0" VerticalAlignment="Top"/>
         <Button Content="Produkty" HorizontalAlignment="Left" Margin="220,69,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
-        <Button Content="Wchodzi W Skład" HorizontalAlignment="Left" Margin="208,114,0,0" VerticalAlignment="Top" Width="101" RenderTransformOrigin="0.097,-0.007" Click="Button_Click"/>
+        <Button Content="Składniki" HorizontalAlignment="Left" Margin="208,114,0,0" VerticalAlignment="Top" Width="101" RenderTransformOrigin="0.097,-0.007" Click="Button_Click"/>
 
     </Grid>
 </Page>

@@ -209,8 +209,6 @@ namespace PizzeriaSconosciuto
 		
 		private string _Nazwa;
 		
-		private int _Ilosc;
-		
 		private float _cena;
 		
     #region Extensibility Method Definitions
@@ -221,8 +219,6 @@ namespace PizzeriaSconosciuto
     partial void OnIdProduktuChanged();
     partial void OnNazwaChanging(string value);
     partial void OnNazwaChanged();
-    partial void OnIloscChanging(int value);
-    partial void OnIloscChanged();
     partial void OncenaChanging(float value);
     partial void OncenaChanged();
     #endregion
@@ -268,26 +264,6 @@ namespace PizzeriaSconosciuto
 					this._Nazwa = value;
 					this.SendPropertyChanged("Nazwa");
 					this.OnNazwaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ilosc", DbType="Int NOT NULL")]
-		public int Ilosc
-		{
-			get
-			{
-				return this._Ilosc;
-			}
-			set
-			{
-				if ((this._Ilosc != value))
-				{
-					this.OnIloscChanging(value);
-					this.SendPropertyChanging();
-					this._Ilosc = value;
-					this.SendPropertyChanged("Ilosc");
-					this.OnIloscChanged();
 				}
 			}
 		}

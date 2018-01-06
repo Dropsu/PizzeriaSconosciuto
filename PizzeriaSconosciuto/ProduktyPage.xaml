@@ -18,13 +18,9 @@
         <Label x:Name="produktid_label" Content="ProduktID" HorizontalAlignment="Left" Margin="334,100,0,0" VerticalAlignment="Top"/>
         <Label x:Name="nazwa_label" Content="Nazwa" HorizontalAlignment="Left" Margin="334,131,0,0" VerticalAlignment="Top" Width="63" RenderTransformOrigin="0.059,0.702"/>
         <Label x:Name="cena_label" Content="Cena" HorizontalAlignment="Left" Margin="334,162,0,0" VerticalAlignment="Top" Width="63" RenderTransformOrigin="0,0.607"/>
-        <Label x:Name="ilosc_label" Content="Ilosc" HorizontalAlignment="Left" Margin="334,193,0,0" VerticalAlignment="Top" Width="63" Height="26"/>
-        <Button x:Name="wykonaj" Content="Dodaj / Usuń / Zmień" HorizontalAlignment="Left" Margin="345,231,0,0" VerticalAlignment="Top" Width="150"/>
         <TextBox x:Name="produktid_box" HorizontalAlignment="Left" Height="23" Margin="418,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <TextBox x:Name="nazwa_box" HorizontalAlignment="Left" Height="23" Margin="418,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
         <TextBox x:Name="cena_box" HorizontalAlignment="Left" Height="23" Margin="418,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <TextBox x:Name="ilosc_box" HorizontalAlignment="Left" Height="23" Margin="418,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
-        <Button Content="Test" HorizontalAlignment="Left" Margin="386,285,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
 
     </Grid>
 </Page>

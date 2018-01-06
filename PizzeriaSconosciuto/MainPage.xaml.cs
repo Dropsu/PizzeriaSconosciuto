@@ -37,7 +37,7 @@ namespace PizzeriaSconosciuto
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("WchodziWSklad.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("SkladnikiPage.xaml", UriKind.Relative));
         }
     }
 }

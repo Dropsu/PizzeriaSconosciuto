@@ -67,7 +67,7 @@ namespace PizzeriaSconosciuto
         {
             try
             {
-                dodajProdukt(db, nazwa_box.Text, Int32.Parse(ilosc_box.Text), Convert.ToDouble(cena_box.Text));
+                dodajProdukt(db, nazwa_box.Text, 999, Convert.ToDouble(cena_box.Text));
                 genericsHelper.fillTablie(db.Produkties, db, conn, dataGrid);
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace PizzeriaSconosciuto
 
             try
             {
-                db.AlterProduct(Int32.Parse(produktid_box.Text), nazwa_box.Text, Convert.ToDouble(cena_box.Text), Int32.Parse(ilosc_box.Text));
+                db.AlterProduct(Int32.Parse(produktid_box.Text), nazwa_box.Text, Convert.ToDouble(cena_box.Text), 999);
                 db.SubmitChanges();
                 genericsHelper.fillTablie(db.Produkties, db, conn, dataGrid);
             }
@@ -123,13 +123,6 @@ namespace PizzeriaSconosciuto
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
 
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            NavigationService navService = NavigationService.GetNavigationService(this);
-            WchodziWSklad nextPage = new WchodziWSklad();
-            navService.Navigate(nextPage);
         }
     }
 }

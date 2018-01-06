@@ -1,0 +1,30 @@
+﻿<Page x:Class="PizzeriaSconosciuto.SkladnikiPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PizzeriaSconosciuto"
+      mc:Ignorable="d" 
+      d:DesignHeight="323.719" d:DesignWidth="588.141"
+      Title="SkladnikiPage">
+
+    <Grid>
+        <Label x:Name="produkty_label" Content="Składniki" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="31,41,0,0" VerticalAlignment="Top" Height="205" Width="340"/>
+        <Button x:Name="dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="31,265,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" Height="35"/>
+        <Button x:Name="usun" Content="Usuń" HorizontalAlignment="Left" Margin="239,265,0,0" VerticalAlignment="Top" Width="75" Click="button_Click_1" Height="35" RenderTransformOrigin="1.731,0.558"/>
+        <Button x:Name="zmien" Content="Zmień dane" HorizontalAlignment="Left" Margin="134,265,0,0" VerticalAlignment="Top" Width="75" Height="35" Click="zmien_Click"/>
+        <Label x:Name="produkt_label" Content="Składnik" HorizontalAlignment="Left" Margin="426,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.353,1.181"/>
+        <Label x:Name="produktid_label" Content="EAN" HorizontalAlignment="Left" Margin="376,85,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="nazwa_label" Content="Nazwa" HorizontalAlignment="Left" Margin="376,117,0,0" VerticalAlignment="Top" Width="63" RenderTransformOrigin="0.059,0.702"/>
+        <Label x:Name="ilosc_label" Content="Ilosc" HorizontalAlignment="Left" Margin="376,148,0,0" VerticalAlignment="Top" Width="63" Height="26"/>
+        <TextBox x:Name="EAN_box" HorizontalAlignment="Left" Height="23" Margin="461,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="nazwa_box" HorizontalAlignment="Left" Height="23" Margin="461,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <TextBox x:Name="ilosc_box" HorizontalAlignment="Left" Height="23" Margin="461,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77"/>
+        <Label x:Name="ilosc_label_Copy2" Content="Opis" HorizontalAlignment="Left" Margin="376,179,0,0" VerticalAlignment="Top" Width="63" Height="26"/>
+        <CheckBox x:Name="wege_check" Content="Wege" HorizontalAlignment="Left" Margin="376,210,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="gluten_check" Content="Gluten" HorizontalAlignment="Left" Margin="376,234,0,0" VerticalAlignment="Top" Height="19"/>
+        <TextBox x:Name="opis_box" HorizontalAlignment="Left" Height="23" Margin="445,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Page>

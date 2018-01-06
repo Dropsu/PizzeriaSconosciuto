@@ -4,7 +4,6 @@
     <Type Name="Produkty">
       <Column Name="IdProduktu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nazwa" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Ilosc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="cena" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
       <Association Name="Produkty_Wchodzi_w_sklad" Member="Wchodzi_w_sklads" ThisKey="IdProduktu" OtherKey="ProduktID" Type="Wchodzi_w_sklad" />
     </Type>
